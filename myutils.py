@@ -13,15 +13,15 @@ def setSysPath(path):
         sys.path.insert(0, path)
 
 def setCWD():
-    '''Checking path, if necessary, change to current working directory'''
+    """Checking path, if necessary, change to current working directory"""
     if os.getcwd() != os.path.dirname(__file__):
         print('Changing Path to Current Working Directory')
         os.chdir(os.path.dirname(__file__))
 
         # or sys.path[0] instead of os.path.dirname(__file__)
-'''As initialized upon program startup, the first item of this list, path[0], 
+"""As initialized upon program startup, the first item of this list, path[0], 
 is the directory containing the script that was used to invoke the Python interpreter
-'''
+"""
 
 # +++++++++++++++++++++++++++++++++ Files +++++++++++++++++++++++++++++++++++++
 
@@ -40,7 +40,7 @@ def loadObj(name ):
 # Downloading file 
 
 def downloadFile(url, fileName=None):
-    '''Downloads file from url and stores it as 'fileName' if given'''
+    """Downloads file from url and stores it as 'fileName' if given"""
 
     try:
         r = requests.get(url)
@@ -59,10 +59,10 @@ def downloadFile(url, fileName=None):
 # Update File if Necessary
 
 def updateFile(fileUrl, useFileName=None, mtime=1, force=False, verbose=False):
-    '''Checks if a file exists on path, if not or if older than mtime
+    """Checks if a file exists on path, if not or if older than mtime
     (days, fraction possible), it downloads it from the url. 
     If no fileName is given it uses the name on url.
-    '''
+    """
     
     if useFileName is None:
         print(f'\nNo file Name given, using url basename. And returning its value')
@@ -105,9 +105,9 @@ def inputInteger():
 # +++++++++++++++++++++++++++++++++ Time ++++++++++++++++++++++++++++++++++++++
 
 def countDown(s=3):
-    '''Simple countdown to delay the start of a process
+    """Simple countdown to delay the start of a process
     countDown(s): s: seconds to delay. Default=3
-    '''
+    """
     for n in range(s,0,-1):
         print(n)
         time.sleep(1)
@@ -115,7 +115,7 @@ def countDown(s=3):
 # +++++++++++++++++++++++++++++++++ Math ++++++++++++++++++++++++++++++++++++++
 
 def ceil(x):
-    '''Simple ceil implementation'''
+    """Simple ceil implementation"""
     y = int(x) if (x==int(x) or x<0) else int(x)+1
     return y
 
@@ -124,12 +124,12 @@ def ceil(x):
 # Improve names, make more descriptive
 
 def normalize(x):
-    '''Normalize numpy array to range [0,1]'''
+    """Normalize numpy array to range [0,1]"""
     xNorm = (x-np.min(x)) / np.ptp(x)
     return xNorm
 
 def normalize2(x):
-    '''Normalize numpy array to range [-1,1]'''
+    """Normalize numpy array to range [-1,1]"""
     xNorm = 2.*(x-np.min(x)) / np.ptp(x) - 1
     return xNorm
 
@@ -139,7 +139,7 @@ def normalize2(x):
 # +++++++++++++++++++++++++++++++++ Numpy +++++++++++++++++++++++++++++++++++++
 
 def isInteger(x):
-    '''Check if the elements of the numpy array x are integers'''
+    """Check if the elements of the numpy array x are integers"""
     return np.equal(np.mod(x, 1), 0)
 
 # +++++++++++++++++++++++++++++++++ Others ++++++++++++++++++++++++++++++++++++
