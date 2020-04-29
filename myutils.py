@@ -60,7 +60,7 @@ def downloadFile(url, fileName=None):
 
 def updateFile(fileUrl, useFileName=None, mtime=1, force=False, verbose=False):
     """Checks if a file exists on path, if not or if older than mtime
-    (days, fraction possible), it downloads it from the url. 
+    (days, fraction possible), it downloads it from the url.
     If no fileName is given it uses the name on url.
     """
     
