@@ -94,13 +94,49 @@ def updateFile(fileUrl, useFileName=None, mtime=1, force=False, verbose=False):
 
 # ++++++++++++++++++++++ Command line Input +++++++++++++++++++++++++++++++++++
 
-def inputInteger():
-    n = input('\nEnter an option (integer):')
-    try:
-        n = int(n)
-        return n
-    except ValueError:
-        print('Not a valid input')
+def inputInteger(default=0):
+    """Enter integers until quiting is desired.
+    If only enter is pressed the default value is used"""
+    while True:
+        
+        n = input('\nEnter an option (integer) [q to quit]:')
+        if n == 'q':
+            sys.exit(0)
+
+        elif n == '':
+            print(f'No pick, using default value {default}')            
+            return default
+
+        try:
+            n = int(n)
+            return n
+        
+        except ValueError:
+            print('Not a valid input')
+
+
+def inputWithTimeout(timeout, promptMsg = None, raiseException = False):
+    '''Input with timeout. In Linux execute it directly on terminal.
+     (It may not work on Windows)
+     
+     timeout: timeout in seconds
+     promptMsg: Message to prompt (optional)
+     raiseException: if True sets TimeoutExpired after timeout.
+     Otherwise continues (default)
+    '''
+    if promptMsg:
+        sys.stdout.write(promptMsg)
+        sys.stdout.flush()
+
+    ready, _, _ = select.select([sys.stdin], [],[], timeout)
+    
+    if ready:
+        return sys.stdin.readline().rstrip('\n') # expect stdin to be line-buffered
+
+    elif raiseException:
+        sys.stdout.write('\nTimeout Expired\n')
+        sys.stdout.flush()
+        raise TimeoutError
 
 # +++++++++++++++++++++++++++++++++ Time ++++++++++++++++++++++++++++++++++++++
 
