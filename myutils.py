@@ -94,12 +94,12 @@ def updateFile(fileUrl, useFileName=None, mtime=1, force=False, verbose=False):
 
 # ++++++++++++++++++++++ Command line Input +++++++++++++++++++++++++++++++++++
 
-def inputInteger(default=0):
+def inputInteger(default=0, message='Enter an option (integer) [q to quit]:'):
     """Enter integers until quiting is desired.
     If only enter is pressed the default value is used"""
     while True:
         
-        n = input('\nEnter an option (integer) [q to quit]:')
+        n = input(f'\n{message}')
         if n == 'q':
             sys.exit(0)
 
