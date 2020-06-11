@@ -36,6 +36,13 @@ def loadObj(name ):
     with open(name + '.pkl', 'rb') as f:
         return pickle.load(f)
 
+# Files List
+
+def listFiles(path):
+    """Returns a List of strings with the file names (no directories) on the given path"""
+    filesList = [f for f in os.listdir(path) if os.path.isfile(path+f)]
+    return filesList
+
 
 # Downloading file 
 
