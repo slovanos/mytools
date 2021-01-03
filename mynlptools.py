@@ -39,7 +39,8 @@ def cleanText(txt, lower=True, stopwords=None, verbose=0):
         txt = txt.lower()
 
     if verbose >= 2: print('Removing unwanted characters...')
-    txt_p = re.sub(r'[^\w\säöüÄÖÜß]+', '', txt)
+    txt_p = re.sub(r'[^\wäöüÄÖÜß]+', ' ', txt)
+    #txt_p = re.sub(r'\W+', ' ', txt) # if text not german
 
     if stopwords is not None:
 
