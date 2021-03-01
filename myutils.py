@@ -2,8 +2,54 @@ import sys, os, time
 import numpy as np
 import pickle
 import requests
+import timeit
 
 # My Utils Functions
+
+# +++++++++++++++++++++++++++++++++ Timing ++++++++++++++++++++++++++++++++++++
+
+def tic():
+    """
+    Time code snippet. Tribute to Matlab tic-toc functions.
+
+    Usage:
+    
+    t = tic()
+
+    #code snippet to time
+
+    toc(t)
+    """
+    return timeit.default_timer()
+
+
+def toc(t):
+    """
+    Time code snippet. Tribute to Matlab tic-toc C functions.
+
+    Usage:
+    
+    t = tic()
+
+    #code snippet to time
+
+    toc(t)
+    """
+    
+    elapsed =  timeit.default_timer()-t
+
+    if elapsed < 1:
+        
+        time_unit = 'ms'
+        elapsed *= 1000
+
+    else:
+
+        time_unit = 's'
+
+    elapsed = round(elapsed, 2)
+
+    print('Time elapsed:', elapsed, time_unit)
 
 # +++++++++++++++++++++++++++++++++ Path ++++++++++++++++++++++++++++++++++++++
 
