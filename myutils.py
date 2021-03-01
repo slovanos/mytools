@@ -3,6 +3,7 @@ import numpy as np
 import pickle
 import requests
 import timeit
+from functools import wraps
 
 # My Utils Functions
 
@@ -50,6 +51,37 @@ def toc(t):
     elapsed = round(elapsed, 2)
 
     print('Time elapsed:', elapsed, time_unit)
+
+
+def timeFunc(f):
+    """
+    Decorator to measure function excecution time.
+    Usage:
+
+    @timefunc
+    def function_to_time(arg1, arg2):
+       pass
+    """
+    @wraps(f)
+    def wrap(*args, **kw):
+
+        ts = timeit.default_timer()
+        result = f(*args, **kw)
+        elapsed = timeit.default_timer() - ts
+
+        if elapsed < 1:
+            time_unit = 'ms'
+            elapsed *= 1000
+        else:
+            time_unit = 's'
+
+        elapsed = round(elapsed, 2)
+
+        #print(f.__name__, args, kw)
+        print('Time:', elapsed, time_unit)
+
+        return result
+    return wrap
 
 # +++++++++++++++++++++++++++++++++ Path ++++++++++++++++++++++++++++++++++++++
 
