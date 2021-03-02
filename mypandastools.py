@@ -3,6 +3,12 @@
 import pandas as pd
 import numpy as np
 
+# Display options
+
+pd.set_option('display.max_columns', 10)
+pd.set_option('max_colwidth', 80)
+pd.set_option('display.width', None) # None: detects automatically terminal width
+
 def getnans(df):
     return df[df.isnull().any(axis=1)]
 
