@@ -262,6 +262,12 @@ def normalize2(x):
 def isInteger(x):
     """Check if the elements of the numpy array x are integers"""
     return np.equal(np.mod(x, 1), 0)
+    
+    
+def cos_sim(u, v):
+    """Calculates cosine similarity function between vectors u and v"""
+
+    return np.dot(u, v)/(np.linalg.norm(u)*np.linalg.norm(v))
 
 # +++++++++++++++++++++++++++++++++ Others ++++++++++++++++++++++++++++++++++++
 
