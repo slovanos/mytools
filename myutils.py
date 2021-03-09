@@ -268,6 +268,12 @@ def cos_sim(u, v):
     """Calculates cosine similarity function between vectors u and v"""
 
     return np.dot(u, v)/(np.linalg.norm(u)*np.linalg.norm(v))
+    
+
+def argsort_k_th(v, k, th):
+    """Return indexes for the top k elements of v greater than th in descending order"""
+    idx, = np.where(v > th)
+    return idx[v[idx].argsort()[::-1][:k]]
 
 # +++++++++++++++++++++++++++++++++ Others ++++++++++++++++++++++++++++++++++++
 
