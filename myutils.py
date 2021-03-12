@@ -223,6 +223,29 @@ def inputWithTimeout(timeout, promptMsg = None, raiseException = False):
         sys.stdout.flush()
         raise TimeoutError
 
+
+def sep(c='-', l=80):
+    
+    """Simple separator for the command line output"""
+
+    if len(c) < 2: # only separator
+        out = c * l
+    else: # text
+        if c[0] in '+-#=': # input: separator followed by text                  
+            s = c[0]
+            c = c[1:]
+        else: # input: just text
+            s = '='
+        ls = l-2 - len(c)
+        n1 = int(ls / 2)
+        n2 = ls - n1
+
+        out = s*n1 + ' ' + c + ' ' + s*n2       
+
+    out = '\n' + out + '\n'
+    print(out)
+
+
 # +++++++++++++++++++++++++++++++++ Time ++++++++++++++++++++++++++++++++++++++
 
 def countDown(s=3):
