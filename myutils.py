@@ -24,7 +24,7 @@ def tic():
     return timeit.default_timer()
 
 
-def toc(t):
+def toc(t, verbose=True):
     """
     Time code snippet. Tribute to Matlab tic-toc C functions.
 
@@ -37,20 +37,23 @@ def toc(t):
     toc(t)
     """
     
-    elapsed =  timeit.default_timer()-t
+    tf =  timeit.default_timer()-t
+    
+    if verbose:
 
-    if elapsed < 1:
-        
-        time_unit = 'ms'
-        elapsed *= 1000
+	    if tf < 1:
+	        
+	        time_unit = 'ms'
+	        elapsed = round(tf*1000, 2)
 
-    else:
+	    else:
 
-        time_unit = 's'
+	        time_unit = 's'
+	        elapsed = round(tf)
 
-    elapsed = round(elapsed, 2)
-
-    print('Time elapsed:', elapsed, time_unit)
+	    print('Time elapsed:', elapsed, time_unit)
+    
+    return tf
 
 
 def timeFunc(f):
