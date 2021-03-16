@@ -41,17 +41,17 @@ def toc(t, verbose=True):
     
     if verbose:
 
-	    if tf < 1:
-	        
-	        time_unit = 'ms'
-	        elapsed = round(tf*1000, 2)
+        if tf < 1:
+            
+            time_unit = 'ms'
+            elapsed = round(tf*1000, 2)
 
-	    else:
+        else:
 
-	        time_unit = 's'
-	        elapsed = round(tf)
+            time_unit = 's'
+            elapsed = round(tf)
 
-	    print('Time elapsed:', elapsed, time_unit)
+        print('Time elapsed:', elapsed, time_unit)
     
     return tf
 
