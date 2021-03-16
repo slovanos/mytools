@@ -4,6 +4,7 @@ import pickle
 import requests
 import timeit
 from functools import wraps
+import json
 
 # My Utils Functions
 
@@ -300,6 +301,18 @@ def argsort_k_th(v, k, th):
     """Return indexes for the top k elements of v greater than th in descending order"""
     idx, = np.where(v > th)
     return idx[v[idx].argsort()[::-1][:k]]
+
+
+class NumpyEncoder(json.JSONEncoder):
+    """ Special json encoder for numpy types """
+    def default(self, obj):
+        if isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return json.JSONEncoder.default(self, obj)
 
 # +++++++++++++++++++++++++++++++++ Others ++++++++++++++++++++++++++++++++++++
 
