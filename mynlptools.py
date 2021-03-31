@@ -22,6 +22,17 @@ def strlist2RegexPat(wordlist, mode='and'):
     # TO-DO: add options for fullmatch, partial match, single-line/whole-text
 
 
+def find_words_in_text(text, words_list):
+
+    """Find in the text the words given in the list. Ignores Case.
+        Returns iterator yielding match objects"""
+
+    pat_string = '|'.join(fr'\b{w}\b' for w in words_list)
+    pat = re.compile(pat_string, flags=re.I | re.X)
+
+    return re.finditer(pat, text)
+
+
 def cleanText(txt, lower=True, stopwords=None, verbose=0):
     """Prepares text for text processing removing unwanted characters,
        stopwords and lowering it.
