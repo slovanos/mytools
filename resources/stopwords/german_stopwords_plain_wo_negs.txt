@@ -379,7 +379,6 @@ neben
 nebenan
 nehmen
 nein
-nicht
 nichts
 nie
 niemals

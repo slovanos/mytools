@@ -1126,7 +1126,6 @@ nämlich
 naturgemaess
 naturgemäss
 natürlich
-ncht
 neben
 nebenan
 nehmen
@@ -1145,7 +1144,6 @@ neuerliches
 neues
 neulich
 neun
-nicht
 nichts
 nichtsdestotrotz
 nichtsdestoweniger
