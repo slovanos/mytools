@@ -12,13 +12,10 @@ import json
 def tic():
     """
     Time code snippet. Tribute to Matlab tic-toc functions.
-
     Usage:
 
     t = tic()
-
     #code snippet to time
-
     toc(t)
     """
     return timeit.default_timer()
@@ -27,33 +24,28 @@ def tic():
 def toc(t, verbose=True):
     """
     Time code snippet. Tribute to Matlab tic-toc C functions.
-
     Usage:
 
     t = tic()
-
     #code snippet to time
-
     toc(t)
     """
-
-    tf = timeit.default_timer()-t
+    elapsed = timeit.default_timer()-t
 
     if verbose:
-
-        if tf < 1:
-
+        if elapsed < 1:
             time_unit = 'ms'
-            elapsed = round(tf*1000, 2)
-
-        else:
-
+            elapsed *= 1000
+        elif 1 <= elapsed < 60:
             time_unit = 's'
-            elapsed = round(tf)
+        else:
+            elapsed /= 60
+            time_unit = 'm'
 
+        elapsed = round(elapsed, 2)
         print('Time elapsed:', elapsed, time_unit)
 
-    return tf
+    return elapsed
 
 
 def timeFunc(f):
@@ -75,8 +67,11 @@ def timeFunc(f):
         if elapsed < 1:
             time_unit = 'ms'
             elapsed *= 1000
-        else:
+        elif 1 <= elapsed < 60:
             time_unit = 's'
+        else:
+            elapsed /= 60
+            time_unit = 'm'
 
         elapsed = round(elapsed, 2)
 
