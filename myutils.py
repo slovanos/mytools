@@ -127,7 +127,7 @@ def loadObj(name):
 def listFiles(path, extensions=''):
     """Returns a List of strings with the file names (no directories) on the given path"""
     filesList = [f for f in os.listdir(path) if os.path.isfile(path+f) and f.endswith(extensions)]
-    return filesList
+    return sorted(filesList)
 
 
 def downloadFile(url, fileName=None):
