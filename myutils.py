@@ -253,17 +253,20 @@ def ceil(x):
 
 
 # +++++++++++++++++++++++++++++++++ Numpy +++++++++++++++++++++++++++++++++++++
-# Normalize numpy array. TO-DO: Improve names, make more descriptive
+
 def normalize(x):
-    """Normalize numpy array to range [0,1]"""
-    xNorm = (x-np.min(x)) / np.ptp(x)
-    return xNorm
+    """Normalize numpy array to the unit interval. Range [0,1]"""
+    return (x-np.min(x)) / np.ptp(x)
 
 
-def normalize2(x):
+def normalizesigned(x):
     """Normalize numpy array to range [-1,1]"""
-    xNorm = 2.*(x-np.min(x)) / np.ptp(x) - 1
-    return xNorm
+    return 2.*(x-np.min(x)) / np.ptp(x) - 1
+
+
+def normalize2range(x, minx=0, maxx=1):
+    """Normalize numpy array to arbitrary range [minx,maxx]"""
+    return (x-x.min()) * (maxx-minx) / x.ptp() + minx
 
 # Alternative to given range:
 # np.interp(a, (a.min(), a.max()), (-1, +1))
