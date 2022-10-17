@@ -119,3 +119,23 @@ def plotResultsCompilation(resultsCompilation, parameterPool, mode = 'allInOne',
         plt.savefig(dateString+fileName)
 
     if show: plt.show(block = False)
+
+
+if __name__ == '__main__':
+
+    def show_colors(color_list):
+
+        colors = np.array(color_list)/255
+        x = np.arange(len(colors))
+
+        for i, c in enumerate(colors):
+
+            plt.plot(x[i], x[i], marker='o', markersize=20, color=colors[i])
+            plt.annotate(str(color_list[i]), (x[i]+0.3, x[i]-0.2), fontsize=8)
+
+        plt.grid(True)
+        #plt.legend(color_list)
+        plt.show()
+
+
+    show_colors(colorList)
