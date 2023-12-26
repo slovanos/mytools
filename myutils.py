@@ -48,7 +48,7 @@ def toc(t, verbose=True):
     return elapsed
 
 
-def timeFunc(f):
+def timefunc(f):
     """
     Decorator to measure function excecution time.
     Usage:
@@ -82,9 +82,9 @@ def timeFunc(f):
     return wrap
 
 
-def countDown(s=3):
+def countdown(s=3):
     """Simple countdown to delay the start of a process
-    countDown(s): s: seconds to delay. Default=3
+    countdown(s): s: seconds to delay. Default=3
     """
     for n in range(s, 0, -1):
         print(n)
@@ -92,13 +92,13 @@ def countDown(s=3):
 
 
 # +++++++++++++++++++++++++++++++++ Path ++++++++++++++++++++++++++++++++++++++
-def setSysPath(path):
+def setsyspath(path):
     if path not in sys.path:
         print(f'Inserting {path} to system path')
         sys.path.insert(0, path)
 
 
-def setCWD():
+def setcwd():
     """Checking path, if necessary, change to current working directory"""
     if os.getcwd() != os.path.dirname(__file__):
         print('Changing Path to Current Working Directory')
@@ -114,24 +114,24 @@ is the directory containing the script that was used to invoke the Python interp
 # +++++++++++++++++++++++++++++++++ Files +++++++++++++++++++++++++++++++++++++
 
 # Load / Save Files to / from variables / List / Download
-def saveObj(obj, name):
+def save(obj, name):
     with open(name + '.pkl', 'wb') as f:
         pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
 
 
-def loadObj(name):
+def load(name):
     with open(name + '.pkl', 'rb') as f:
         return pickle.load(f)
 
 
-def listFiles(path, extensions=''):
+def list_files(path, extensions=''):
     """Returns a List of strings with the file names (no directories) on the given path"""
     filesList = [f for f in os.listdir(path) if os.path.isfile(path+f) and f.endswith(extensions)]
     return sorted(filesList)
 
 
-def downloadFile(url, fileName=None):
-    """Downloads file from url and stores it as 'fileName' if given"""
+def download_file(url, file_name=None):
+    """Downloads file from url and stores it as 'file_name' if given"""
     try:
         r = requests.get(url)
         # r.raise_for_status()
@@ -139,48 +139,48 @@ def downloadFile(url, fileName=None):
         print(e)
         # raise Systemexit(e)
     else:
-        if fileName is None:
-            fileName = os.path.basename(url)
+        if file_name is None:
+            file_name = os.path.basename(url)
 
-        with open(fileName, 'wb') as f:
+        with open(file_name, 'wb') as f:
             f.write(r.content)
 
 
 # Update File if Necessary
-def updateFile(fileUrl, useFileName=None, mtime=1, force=False, verbose=False):
+def update_file(file_url, use_file_name=None, mtime=1, force=False, verbose=False):
     """Checks if a file exists on path, if not or if older than mtime
     (days, fraction possible), it downloads it from the url.
-    If no fileName is given it uses the name on url.
+    If no file_name is given it uses the name on url.
     """
-    if useFileName is None:
+    if use_file_name is None:
         print('\nNo file Name given, using url basename. And returning its value')
-        fileName = os.path.basename(fileUrl)
+        file_name = os.path.basename(file_url)
     else:
-        fileName = useFileName
+        file_name = use_file_name
 
-    if os.path.exists(fileName):
+    if os.path.exists(file_name):
         if verbose:
             print('\nFile already exists')
 
-        timeDiff = (time.time() - os.path.getmtime(fileName)) / (3600*24)
+        time_diff = (time.time() - os.path.getmtime(file_name)) / (3600*24)
 
-        if timeDiff >= mtime or force:
+        if time_diff >= mtime or force:
             if verbose:
                 print('\nLocal version older than required. Downloading from url...')
 
-            downloadFile(fileUrl, fileName)
+            download_file(file_url, file_name)
         else:
-            print(f'\nThe date of local file {fileName} is within required timespan'
+            print(f'\nThe date of local file {file_name} is within required timespan'
                   f'of {mtime} days. Not downloading')
     else:
-        downloadFile(fileUrl, fileName)
+        download_file(file_url, file_name)
 
-    if useFileName is None:
-        return fileName
+    if use_file_name is None:
+        return file_name
 
 
 # ++++++++++++++++++++++ Command line Input +++++++++++++++++++++++++++++++++++
-def inputInteger(default=0, message='Enter an option (integer) [q to quit]:'):
+def input_integer(default=0, message='Enter an option (integer) [q to quit]:'):
     """Enter integers until quiting is desired.
     If only enter is pressed the default value is used"""
     while True:
@@ -201,17 +201,17 @@ def inputInteger(default=0, message='Enter an option (integer) [q to quit]:'):
             print('Not a valid input')
 
 
-def inputWithTimeout(timeout, promptMsg=None, raiseException=False):
+def input_w_timeout(timeout, prompt_msg=None, raise_exception=False):
     '''Input with timeout. In Linux execute it directly on terminal.
      (It may not work on Windows)
 
      timeout: timeout in seconds
-     promptMsg: Message to prompt (optional)
-     raiseException: if True sets TimeoutExpired after timeout.
+     prompt_msg: Message to prompt (optional)
+     raise_exception: if True sets TimeoutExpired after timeout.
      Otherwise continues (default)
     '''
-    if promptMsg:
-        sys.stdout.write(promptMsg)
+    if prompt_msg:
+        sys.stdout.write(prompt_msg)
         sys.stdout.flush()
 
     ready, _, _ = select.select([sys.stdin], [], [], timeout)
@@ -219,7 +219,7 @@ def inputWithTimeout(timeout, promptMsg=None, raiseException=False):
     if ready:
         return sys.stdin.readline().rstrip('\n')  # expect stdin to be line-buffered
 
-    elif raiseException:
+    elif raise_exception:
         sys.stdout.write('\nTimeout Expired\n')
         sys.stdout.flush()
         raise TimeoutError
@@ -272,7 +272,7 @@ def normalize2range(x, minx=0, maxx=1):
 # np.interp(a, (a.min(), a.max()), (-1, +1))
 
 
-def isInteger(x):
+def is_integer(x):
     """Check if the elements of the numpy array x are integers"""
     return np.equal(np.mod(x, 1), 0)
 
@@ -302,8 +302,8 @@ class NumpyEncoder(json.JSONEncoder):
 
 # +++++++++++++++++++++++++++++++++ Others ++++++++++++++++++++++++++++++++++++
 # Toggle values (used for turns)
-def toggleValue(currentValue, value1, value2):
-    if currentValue == value1:
+def toggle_value(current_value, value1, value2):
+    if current_value == value1:
         return value2
-    elif currentValue == value2:
+    elif current_value == value2:
         return value1
