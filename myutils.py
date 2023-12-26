@@ -125,9 +125,16 @@ def load(name):
 
 
 def list_files(path, extensions=''):
-    """Returns a List of strings with the file names (no directories) on the given path"""
-    filesList = [f for f in os.listdir(path) if os.path.isfile(path+f) and f.endswith(extensions)]
-    return sorted(filesList)
+    """
+    Returns a sorted List of strings with the file names for the given path
+    extensions: string or tuple with strings.
+    Examples: list_files('exampledir, ('.jpg', '.png'))
+    """
+
+    files_list = [f for f in os.listdir(path)
+    if os.path.isfile(os.path.join(path, f)) and f.endswith(extensions)]
+
+    return sorted(files_list)
 
 
 def download_file(url, file_name=None):
