@@ -7,7 +7,7 @@ import keras.backend as K
 import numpy as np
 # Grid Search form scikit-learn
 from sklearn.model_selection import ParameterGrid
-from mytools.myutils import ceil, isInteger
+from mytools.myutils import ceil, is_integer
 import time
 
 # My Keras Utils Functions
