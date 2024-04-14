@@ -1,3 +1,15 @@
+# Compiled Python files
 __pycache__/
-test/
+*.pyc
+
+# My test files and folers
 test*.py
+local_*
+test/
+
+# IDE
+.vscode/
+
+# Other
+todo.txt
+to-do.txt
