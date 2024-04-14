@@ -23,7 +23,6 @@ def strlist2RegexPat(wordlist, mode='and'):
 
 
 def find_words_in_text(text, words_list):
-
     """Find in the text the words given in the list. Ignores Case.
         Returns iterator yielding match objects"""
 
@@ -33,7 +32,7 @@ def find_words_in_text(text, words_list):
     return re.finditer(pat, text)
 
 
-def cleanText(txt, lower=True, stopwords=None, verbose=0):
+def clean_text(txt, lower=True, stopwords=None, verbose=0):
     """Prepares text for text processing removing unwanted characters,
        stopwords and lowering it.
        Arguments:
@@ -87,20 +86,15 @@ def cleanText(txt, lower=True, stopwords=None, verbose=0):
     return txt_p
 
 
-def convertUmlauts(word):
-    """
-    Replace umlauts for a given text    
-    :param word: text as string
-    :return: manipulated text as str
-    """
-    tempVar = word
+def convert_umlauts(text):
+    """Replace umlauts with non-diacritic equivalent"""
     
-    tempVar = tempVar.replace('ä', 'ae')
-    tempVar = tempVar.replace('ö', 'oe')
-    tempVar = tempVar.replace('ü', 'ue')
-    tempVar = tempVar.replace('Ä', 'Ae')
-    tempVar = tempVar.replace('Ö', 'Oe')
-    tempVar = tempVar.replace('Ü', 'Ue')
-    tempVar = tempVar.replace('ß', 'ss')
+    text = text.replace('ä', 'ae')
+    text = text.replace('ö', 'oe')
+    text = text.replace('ü', 'ue')
+    text = text.replace('Ä', 'Ae')
+    text = text.replace('Ö', 'Oe')
+    text = text.replace('Ü', 'Ue')
+    text = text.replace('ß', 'ss')
     
-    return tempVar
+    return text
