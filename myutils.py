@@ -132,7 +132,7 @@ def list_files(path, extensions=''):
     """
 
     files_list = [f for f in os.listdir(path)
-    if os.path.isfile(os.path.join(path, f)) and f.endswith(extensions)]
+                  if os.path.isfile(os.path.join(path, f)) and f.endswith(extensions)]
 
     return sorted(files_list)
 

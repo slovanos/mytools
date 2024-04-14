@@ -1,6 +1,7 @@
 # My NLP Tools
 import re
 
+
 def strlist2RegexPat(wordlist, mode='and'):
     """Converts a list of string into a regex pattern for AND or OR search.
        Arguments:
@@ -17,7 +18,7 @@ def strlist2RegexPat(wordlist, mode='and'):
 
     elif mode == 'or':
         pat = r'\b(?:{})\b'.format('|'.join(wordlist))
-        
+
     return pat
     # TO-DO: add options for fullmatch, partial match, single-line/whole-text
 
@@ -45,16 +46,19 @@ def clean_text(txt, lower=True, stopwords=None, verbose=0):
         print('Initial number of words:', len(txt.split()))
 
     if lower:
-        if verbose >= 2: print('Lowering...')
+        if verbose >= 2:
+            print('Lowering...')
         txt = txt.lower()
 
-    if verbose >= 2: print('Removing unwanted characters...')
+    if verbose >= 2:
+        print('Removing unwanted characters...')
     txt_p = re.sub(r'[^\wäöüÄÖÜß]+', ' ', txt)
-    #txt_p = re.sub(r'\W+', ' ', txt) # if text not german
+    # txt_p = re.sub(r'\W+', ' ', txt) # if text not german
 
     if stopwords is not None:
 
-        if verbose >= 2: print('Removing stopwords...')
+        if verbose >= 2:
+            print('Removing stopwords...')
 
         if isinstance(stopwords, list):
             swds = stopwords
@@ -68,17 +72,18 @@ def clean_text(txt, lower=True, stopwords=None, verbose=0):
                              ' a file containing these one per line')
         # Remove stopwords
         # ALTERNATIVE to pattern way:
-        #(has the advantage that no extra spaces removal step is required)
+        # (has the advantage that no extra spaces removal step is required)
         txt_p = ' '.join([w for w in txt_p.split() if w not in swds])
 
         # Pattern way
-        #swds_pat = r'\b(?:{})\b'.format('|'.join(swds)) # OR pattern
-        #txt_p = re.sub(swds_pat, '', txt_p)
+        # swds_pat = r'\b(?:{})\b'.format('|'.join(swds)) # OR pattern
+        # txt_p = re.sub(swds_pat, '', txt_p)
 
     # Remove extra spaces and strip
-    if stopwords is None: # Otherwise not needed because it happens automatically
-        if verbose >= 2: print('Removing unnecessary spaces, tabs, line breaks...')
-        txt_p = re.sub(r'\s+', ' ', txt_p).strip() # \s matches any space character (spaces, tabs, line breaks)
+    if stopwords is None:  # Otherwise not needed because it happens automatically
+        if verbose >= 2:
+            print('Removing unnecessary spaces, tabs, line breaks...')
+        txt_p = re.sub(r'\s+', ' ', txt_p).strip()  # \s matches any space character (spaces, tabs, line breaks)
 
     if verbose >= 1:
         print('Number of words after text-clean-up:', len(txt_p.split()))
@@ -88,7 +93,7 @@ def clean_text(txt, lower=True, stopwords=None, verbose=0):
 
 def convert_umlauts(text):
     """Replace umlauts with non-diacritic equivalent"""
-    
+
     text = text.replace('ä', 'ae')
     text = text.replace('ö', 'oe')
     text = text.replace('ü', 'ue')
@@ -96,7 +101,7 @@ def convert_umlauts(text):
     text = text.replace('Ö', 'Oe')
     text = text.replace('Ü', 'Ue')
     text = text.replace('ß', 'ss')
-    
+
     return text
 
 
@@ -121,7 +126,7 @@ def get_chunks_basic(text, max_words=256):
     return chunks
 
 
-def get_chunks_basic_fast(text, max_words=256): # optimized for performance
+def get_chunks_basic_fast(text, max_words=256):  # optimized for performance
     """Split text in chunks with less than max_words"""
 
     # List of lines skipping empty lines
