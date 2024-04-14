@@ -162,7 +162,7 @@ def get_chunks(text, max_words=256, max_title_words=4):
     for l in lines:
         nwords = len(l.split())
         if len(chunk.split()) + nwords <= max_words and (
-            nwords >= max_title_words
+            nwords > max_title_words
             or all(len(s.split()) <= max_title_words for s in chunk.splitlines())
         ):
             chunk += l  # if splitline(False) do += "\n" + l
@@ -188,7 +188,7 @@ def get_chunks_fast(text, max_words=256, max_title_words=4):  # optimized for pe
     for l in lines:
         line_length = len(l.split())
         if chunk_length + line_length <= max_words and (
-            line_length >= max_title_words
+            line_length > max_title_words
             or all(len(s.split()) <= max_title_words for s in chunk)
         ):
             chunk.append(l)
