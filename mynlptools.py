@@ -98,3 +98,49 @@ def convert_umlauts(text):
     text = text.replace('ß', 'ss')
     
     return text
+
+
+def get_chunks_basic(text, max_words=256):
+    """Split text in chunks with less than max_words"""
+
+    # List of lines skipping empty lines
+    lines = [l for l in text.splitlines(True) if l.strip()]
+
+    chunks = []
+    chunk = ''
+    for l in lines:
+        if len(chunk.split() + l.split()) <= max_words:
+            chunk += l  # if splitline(False) do += "\n" + l
+            continue
+        chunks.append(chunk)
+        chunk = l
+
+    if chunk:
+        chunks.append(chunk)
+
+    return chunks
+
+
+def get_chunks(text, max_words=256, max_title_words=4):
+    """Split text in trivial context-awared chunks with less than max_words"""
+
+    # List of lines skipping empty lines
+    lines = [l for l in text.splitlines(True) if l.strip()]
+
+    chunks = []
+    chunk = ''
+    for l in lines:
+        nwords = len(l.split())
+        if len(chunk.split()) + nwords <= max_words and (
+            nwords >= max_title_words
+            or all(len(s.split()) <= max_title_words for s in chunk.splitlines())
+        ):
+            chunk += l  # if splitline(False) do += "\n" + l
+            continue
+        chunks.append(chunk)
+        chunk = l
+
+    if chunk:
+        chunks.append(chunk)
+
+    return chunks
