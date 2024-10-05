@@ -9,6 +9,7 @@ import json
 
 
 # ++++++++++++++++++++++++++ Timing / Time ++++++++++++++++++++++++++++++++++++
+
 def tic():
     """
     Time code snippet. Tribute to Matlab tic-toc functions.
@@ -92,6 +93,7 @@ def countdown(s=3):
 
 
 # +++++++++++++++++++++++++++++++++ Path ++++++++++++++++++++++++++++++++++++++
+
 def setsyspath(path):
     if path not in sys.path:
         print(f'Inserting {path} to system path')
@@ -207,6 +209,7 @@ def update_file(file_url, use_file_name=None, mtime=1, force=False, verbose=Fals
 
 
 # ++++++++++++++++++++++ Command line Input +++++++++++++++++++++++++++++++++++
+
 def input_integer(default=0, message='Enter an option (integer) [q to quit]:'):
     """Enter integers until quiting is desired.
     If only enter is pressed the default value is used"""
@@ -273,6 +276,7 @@ def sep(c='-', l=80):
 
 
 # +++++++++++++++++++++++++++++++++ Math ++++++++++++++++++++++++++++++++++++++
+
 def ceil(x):
     """Simple ceil implementation"""
     y = int(x) if (x == int(x) or x < 0) else int(x)+1
@@ -328,6 +332,7 @@ class NumpyEncoder(json.JSONEncoder):
 
 
 # +++++++++++++++++++++++++++++++++ Others ++++++++++++++++++++++++++++++++++++
+
 # Toggle values (used for turns)
 def toggle_value(current_value, value1, value2):
     if current_value == value1:
